@@ -63,6 +63,7 @@ struct Veiculo {
     int ano;
     float preco;
 };
+
 int ex2(){
     int qtdVeiculos;
     struct Veiculo *veiculos;
@@ -102,7 +103,40 @@ int ex2(){
 }
 
 int ex3(){
+    int capacidade = 3;
+    int* vetor = malloc(capacidade * sizeof(int));
+    int num = 0, index = 0;
 
+    if(vetor == NULL){
+        printf("Memória insuficiente!");
+        return 1;
+    }
+
+    printf("Informe um número: ");
+    scanf("%d", &num);
+    
+    while(num != 0){
+        vetor[index] = num;
+        index++;
+
+        if(index == capacidade){
+            vetor = realloc(vetor, (capacidade + 3) * sizeof(int));
+            if(vetor == NULL){
+                printf("Memória insuficiente!");
+                return 1;
+            }
+            capacidade += 3;
+        }
+        printf("Informe um número: ");
+        scanf("%d", &num);        
+    }
+
+    printf("Vetor: { ");
+    for(int i = 0; i < (index - 1); i++){
+        printf("%d, ", vetor[i]);
+    }
+    printf("%d }", vetor[index - 1]);
+    
     return 0;
 }
 
